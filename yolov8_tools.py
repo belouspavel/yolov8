@@ -273,12 +273,12 @@ def track_on_detect(path_model, tracker_path, video_source, tracker, start_vid =
 
   for N in range(start_vid,length+1): # устанавливаем какие видео смотрим
     try:
-        with open(path +f'{N}.npy', 'rb') as files:  #Загружаем объект содержащий формат исходного изображения и детекции
+        with open(path_model +f'{N}.npy', 'rb') as files:  #Загружаем объект содержащий формат исходного изображения и детекции
           all_boxes_and_shp = np.load(files, allow_pickle=True)
           orig_shp = all_boxes_and_shp[0] # Здесь формат
           all_boxes = all_boxes_and_shp[1]  # Здесь боксы
           out_boxes = tracking_on_detect(all_boxes,tracker, orig_shp)   # Отправляем боксы в трекинг + пробрасываем мимо трекинга каски и нетрекованные боксы людей
-          create_video_with_bbox(out_boxes, video_source + f'{N}.mp4', path + tracker_path + f'{N}_track.mp4') # функция отрисовки боксов на соответсвующем видео
+          create_video_with_bbox(out_boxes, video_source + f'{N}.mp4', path_model + tracker_path + f'{N}_track.mp4') # функция отрисовки боксов на соответсвующем видео
           # out_boxes_pd = pd.DataFrame(out_boxes)
           # out_boxes_pd.to_excel(path + tracker_path + f"df_{N}_{round(orig_shp[1])}_.xlsx") # сохраняем что бы было)
           men = get_men(out_boxes)   # Смотрим у какого айди есть каски и жилеты (по порогу от доли кадров где был зафиксирован айди человека + каска и жилет в его бб и без них)
