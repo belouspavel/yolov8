@@ -5,7 +5,7 @@ from IPython.display import clear_output
 import cv2 
 import os
 from sklearn.metrics import precision_recall_fscore_support
-# edit
+
 
 
 
@@ -256,7 +256,7 @@ def get_count_vialotion(men, orig_shape): # step height определяем с�
 def track_on_detect(path_model, tracker_path, video_source, tracker, start_vid = 1, end_vid = 1):
   if end_vid == 1:
     length = len([f for f in os.listdir(path_model) 
-      if f.endswith('.mp4') and os.path.isfile(os.path.join(path_model, f))]) # подсчитаем количество видео в папке
+      if f.endswith('.npy') and os.path.isfile(os.path.join(path_model, f))]) # подсчитаем количество видео в папке
   else:
     length = end_vid
 
